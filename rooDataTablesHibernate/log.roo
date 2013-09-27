@@ -1,0 +1,19 @@
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-09-26 14:06:53
+project --topLevelPackage org.pablog.bookdb --projectName rooDatatablesHibernate --java 6 --packaging WAR 
+jpa setup --provider HIBERNATE --database MYSQL --databaseName roodh --userName pab --password pab
+entity jpa --class ~.domain.Book
+entity jpa --class ~.domain.Book --testAutomatically 
+field string --fieldName name --sizeMax 50 --class ~.domain.Book
+field string --fieldName description --sizeMax 3000 --class ~.domain.Book
+field string --fieldName author --sizeMax 50 --class ~.domain.Book
+field string --fieldName publisher --sizeMax 50 --class ~.domain.Book
+field string --fieldName isbn --sizeMax 50 --class ~.domain.Book
+field number --fieldName pages --type java.lang.Integer
+field date --fieldName datePublished --type java.util.Date --past
+json all --deepSerialize
+web mvc setup
+web mvc scaffold --class ~.web.BookController --backingType ~.domain.Book
+service type --interface ~.service.BookService --entity ~.domain.Book
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-09-26 19:07:15
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-09-27 10:00:25
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-09-27 10:10:46

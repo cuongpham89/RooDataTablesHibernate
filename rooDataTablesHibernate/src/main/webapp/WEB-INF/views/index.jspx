@@ -1,0 +1,40 @@
+<div xmlns:table="urn:jsptagdir:/WEB-INF/tags/datatables" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+  <spring:message var="app_name" code="application_name" htmlEscape="false" />
+  <spring:message var="title" code="welcome_titlepane" arguments="${app_name}" htmlEscape="false" />
+  <util:panel id="title" title="${title}">
+    <h3>
+      <spring:message code="welcome_h3" />
+    </h3>
+    <p>
+      <spring:message code="welcome_text" />
+    </p>
+  </util:panel>
+  <br/>
+  <script><![CDATA[
+    	function getExtraData() {
+    		// No extra data
+    	}
+  ]]></script>
+  <c:set value="/books" var="oPath"/>
+  <c:set var="fnRowCallback"><![CDATA[ 
+	function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+    	$(nRow).css('cursor', 'pointer');
+    	$(nRow).live('click',function () {
+    		window.location = contextPath+'/books/'+aData.id;
+		});
+    }
+  ]]></c:set>
+  <spring:message arguments="Book" code="entity_list_all" htmlEscape="false" var="title_msg"/>
+  <util:panel id="pl_org_pablog_bookdb_domain_Book" openPane="true" title="${title_msg}">
+      <table:datatables create="true" delete="false" extraData="getExtraData()" fnRowCallback="${fnRowCallback}" id="l_org_pablog_bookdb_domain_Book" path="${oPath}" show="false" update="false" z="user-managed">
+          <table:datacolumn filterType="text" id="c_org_pablog_bookdb_domain_Book_name" property="name" sort="true" z="user-managed"/>
+          <table:datacolumn filterType="text" id="c_org_pablog_bookdb_domain_Book_author" property="author" sort="true" z="user-managed"/>
+          <table:datacolumn filterType="text" id="c_org_pablog_bookdb_domain_Book_publisher" property="publisher" sort="true" z="user-managed"/>
+          <table:datacolumn filterType="text" id="c_org_pablog_bookdb_domain_Book_isbn" property="isbn" sort="true" z="user-managed"/>
+          <table:datacolumn filterType="date-range" id="c_org_pablog_bookdb_domain_Book_datepublished" property="datePublished" date="true" dateTimePattern="${book_datepublished_date_format}" sort="true" width="30px" z="user-managed"/>
+<!--        <table:datacolumn filterType="select" filterValues="${associatedPropertyCollection}" id="c_org_pablog_bookdb_domain_Book_property" itemLabel="name" itemValue="id" property="property" sort="true" z="user-managed"/>  -->
+      </table:datatables>
+  </util:panel>
+</div>
