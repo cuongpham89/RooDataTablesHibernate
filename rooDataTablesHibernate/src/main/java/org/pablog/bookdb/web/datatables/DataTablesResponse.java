@@ -7,31 +7,31 @@ import flexjson.JSONSerializer;
 
 public class DataTablesResponse<T extends Object> implements Serializable {
 	/*
-	 * Questo parametro viene cambiato dal client per ogni chiamata ajax.
-	 * Doviamo fare atenzione a fare il cast a integer per evitare Xss attacks
+	 * This parameter is changed on the client side for evry ajax call.
+	 * Cast to integer to avoid Xss attacks
 	 */       
 	private String sEcho;
 
 	/*
-	 * Numero totale di records
+	 * Total number of records
 	 */
 	private int iTotalRecords;
 	
 	/*
-	 * Numero totale di records dopo filtrare. Siccome non filtriamo, per noi e' lo stesso di iTotalRecords. 
-	 * Pero' datatables si aspetta questo parametro
+	 * Total number of records after filtering. We are not filtering but datatables expects this parameter 
 	 */
 	private int  iTotalDisplayRecords;
 	
 	/*
 	 * Datasource.
-	 * Come default, datatables aspetta un array 2D pero flexjson converte la lista come un array di oggeti json.
-	 * Usando il parametro 'aoColumns' nella chiamata di datatables possiamo specificare le proprieta' corrispondenti alle colonne
+	 * By default, DataTables will expect a 2D array for its data source. However, Using the 'aoColumns' parameter 
+	 * in the datatables call we can map properties to columns
+	 * Flexjson converts the list of returned objects into a json objects array.
 	 */
 	private List<T> aaData;
 	
 	/*
-	 * Proprieta' usata per inviare messagi (errori, info, etc) dal server nel ritorno delle chiamate json.
+	 * Property used for sending messages (errors, info, etc) from server in the response.
 	 */
 //	private String serverMessage;
 //	
